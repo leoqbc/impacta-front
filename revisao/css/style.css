@@ -1,0 +1,33 @@
+body {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 1.8rem;
+}
+
+/* estilo de class="centraliza-texto" */
+.centraliza-texto {
+    text-align: center;
+}
+
+div {
+    background-color: #DDD;
+    margin-top: 10px;
+    margin-bottom: 10px;
+
+    /* 4 valores: cima direita baixo esquerda  */
+    /* margin: 5px 5px 5px 5px;  */
+
+    /* 2 valores: cima  baixo  */
+    margin: 5px 5px; 
+
+    width: 300px;
+
+    padding: 5px;
+}
+
+label {
+    display: block;
+}
+
+#resposta {
+    padding: 5px;
+}
