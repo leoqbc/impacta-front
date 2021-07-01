@@ -5,6 +5,29 @@ const tarefas = document.getElementById('tarefas');
 
 let contador = 0;
 
+fetch('https://jsonplaceholder.typicode.com/todos')
+    // neste momento convertemos json em objeto/array javascript
+    .then(response => response.json())
+    .then(json => {
+        json.forEach(todo => {
+            if (todo.completed === false) {
+                addTarefa(todo.completed, todo.title);
+            } 
+        });
+
+        // map
+        // json.map(todo => {
+        //     if (todo.completed === false) {
+        //         addTarefa(todo.completed, todo.title);
+        //     }
+        // })
+
+        // forma classica
+        // for(let i = 0; i < json.length; i++) {
+        //     json[i].completed
+        // }
+    });
+
 // addEventListener deixa colocarmos multiplos eventos
 // no mesmo elemento, rodando todos ao mesmo tempo quando disparados
 tarefaForm.addEventListener('submit', function (event) {
@@ -27,26 +50,34 @@ tarefaForm.addEventListener('submit', function (event) {
 
     tarefaInput.classList.remove('is-invalid');
 
+    addTarefa(false, tarefaInput.value);
+
+    // Atua como um limpador dos dados
+    tarefaForm.reset();
+});
+
+// Criamos um função que adiciona tarefa recebendo 2 parametros
+// se passar true ela vem ativa, se não vem desativa
+function addTarefa(status, tarefaDigitada) {
     contador++;
+
+    const checkedString = status ? 'checked' : '';
 
     const tarefaTexto = `
         <li class="list-group-item">
             <div class="form-check d-flex justify-content-between align-items-center">
-                <input type="checkbox" id="tarefa-${contador}" class="form-check-input">
+                <input type="checkbox" id="tarefa-${contador}" class="form-check-input" ${checkedString}>
                 <label for="tarefa-${contador}" class="form-check-label flex-grow-1 ms-3">
-                    ${tarefaInput.value}
+                    ${tarefaDigitada}
                 </label>
-                <button class="btn btn-danger">Deletar</button>
+                <button class="btn btn-danger" onclick="deletar(this);">Deletar</button>
             </div>
         </li>
     `;
 
     // console.log(tarefaInput.value);
     tarefas.innerHTML += tarefaTexto;
-
-    // Atua como um limpador dos dados
-    tarefaForm.reset();
-});
+}
 
 // .addEventListener ** não precisamos
 // estamos usando Arrow function, mesma coisa que function () { }
@@ -66,13 +97,17 @@ concluirTarefa.onclick = () => {
     });
 }
 
-// function () { }
+function deletar(elemento) {
+    elemento
+        .parentNode
+        .parentNode
+        .remove();
+}
 
-// let nomeCompleto = 'Leonardo';
-
-// // concatenação
-// nomeCompleto += ' Tumadjian';
-
-// nomeCompleto += ' Da Silva';
-
-// nomeCompleto // Leonardo Tumadjian Da Silva
+// Como arraw function
+// const deletar = (elemento) => {
+//     elemento
+//         .parentNode
+//         .parentNode
+//         .remove();
+// }
