@@ -21,7 +21,10 @@
                         <form id="tarefa-form">
                             <div class="form-group">
                                 <label class="form-label text-primary" for="tarefa-input">Tarefa:</label>
-                                <input type="text" id="tarefa-input" placeholder="Digite sua tarefa" class="form-control">
+                                <input autocomplete="off" type="text" id="tarefa-input" placeholder="Digite sua tarefa" class="form-control">
+                                <div class="invalid-feedback">
+
+                                </div>
                             </div>
                         </form>
                     </div>
@@ -37,7 +40,7 @@
                     </div>
 
                     <ul id="tarefas" class="list-group list-group-flush lista-size">
-
+                        
                     </ul>
                         
                     <div class="card-footer text-end">
